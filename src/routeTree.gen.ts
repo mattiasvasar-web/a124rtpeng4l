@@ -10,33 +10,193 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as GaleriiRouteImport } from './routes/galerii'
+import { Route as KassaRouteImport } from './routes/kassa'
+import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as MinuTellimusedRouteImport } from './routes/minu-tellimused'
+import { Route as OstukorvRouteImport } from './routes/ostukorv'
+import { Route as PrivaatsusRouteImport } from './routes/privaatsus'
+import { Route as TingimusedRouteImport } from './routes/tingimused'
+import { Route as TootedRouteImport } from './routes/tooted'
+import { Route as TellimusIdRouteImport } from './routes/tellimus.$id'
+import { Route as ToodeIdRouteImport } from './routes/toode.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GaleriiRoute = GaleriiRouteImport.update({
+  id: '/galerii',
+  path: '/galerii',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KassaRoute = KassaRouteImport.update({
+  id: '/kassa',
+  path: '/kassa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MinuTellimusedRoute = MinuTellimusedRouteImport.update({
+  id: '/minu-tellimused',
+  path: '/minu-tellimused',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OstukorvRoute = OstukorvRouteImport.update({
+  id: '/ostukorv',
+  path: '/ostukorv',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivaatsusRoute = PrivaatsusRouteImport.update({
+  id: '/privaatsus',
+  path: '/privaatsus',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TingimusedRoute = TingimusedRouteImport.update({
+  id: '/tingimused',
+  path: '/tingimused',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TootedRoute = TootedRouteImport.update({
+  id: '/tooted',
+  path: '/tooted',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TellimusIdRoute = TellimusIdRouteImport.update({
+  id: '/tellimus/$id',
+  path: '/tellimus/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToodeIdRoute = ToodeIdRouteImport.update({
+  id: '/toode/$id',
+  path: '/toode/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
+  '/galerii': typeof GaleriiRoute
+  '/kassa': typeof KassaRoute
+  '/kontakt': typeof KontaktRoute
+  '/minu-tellimused': typeof MinuTellimusedRoute
+  '/ostukorv': typeof OstukorvRoute
+  '/privaatsus': typeof PrivaatsusRoute
+  '/tingimused': typeof TingimusedRoute
+  '/tooted': typeof TootedRoute
+  '/tellimus/$id': typeof TellimusIdRoute
+  '/toode/$id': typeof ToodeIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
+  '/galerii': typeof GaleriiRoute
+  '/kassa': typeof KassaRoute
+  '/kontakt': typeof KontaktRoute
+  '/minu-tellimused': typeof MinuTellimusedRoute
+  '/ostukorv': typeof OstukorvRoute
+  '/privaatsus': typeof PrivaatsusRoute
+  '/tingimused': typeof TingimusedRoute
+  '/tooted': typeof TootedRoute
+  '/tellimus/$id': typeof TellimusIdRoute
+  '/toode/$id': typeof ToodeIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
+  '/galerii': typeof GaleriiRoute
+  '/kassa': typeof KassaRoute
+  '/kontakt': typeof KontaktRoute
+  '/minu-tellimused': typeof MinuTellimusedRoute
+  '/ostukorv': typeof OstukorvRoute
+  '/privaatsus': typeof PrivaatsusRoute
+  '/tingimused': typeof TingimusedRoute
+  '/tooted': typeof TootedRoute
+  '/tellimus/$id': typeof TellimusIdRoute
+  '/toode/$id': typeof ToodeIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/galerii'
+    | '/kassa'
+    | '/kontakt'
+    | '/minu-tellimused'
+    | '/ostukorv'
+    | '/privaatsus'
+    | '/tingimused'
+    | '/tooted'
+    | '/tellimus/$id'
+    | '/toode/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/galerii'
+    | '/kassa'
+    | '/kontakt'
+    | '/minu-tellimused'
+    | '/ostukorv'
+    | '/privaatsus'
+    | '/tingimused'
+    | '/tooted'
+    | '/tellimus/$id'
+    | '/toode/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/galerii'
+    | '/kassa'
+    | '/kontakt'
+    | '/minu-tellimused'
+    | '/ostukorv'
+    | '/privaatsus'
+    | '/tingimused'
+    | '/tooted'
+    | '/tellimus/$id'
+    | '/toode/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  AuthRoute: typeof AuthRoute
+  GaleriiRoute: typeof GaleriiRoute
+  KassaRoute: typeof KassaRoute
+  KontaktRoute: typeof KontaktRoute
+  MinuTellimusedRoute: typeof MinuTellimusedRoute
+  OstukorvRoute: typeof OstukorvRoute
+  PrivaatsusRoute: typeof PrivaatsusRoute
+  TingimusedRoute: typeof TingimusedRoute
+  TootedRoute: typeof TootedRoute
+  TellimusIdRoute: typeof TellimusIdRoute
+  ToodeIdRoute: typeof ToodeIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +208,107 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galerii': {
+      id: '/galerii'
+      path: '/galerii'
+      fullPath: '/galerii'
+      preLoaderRoute: typeof GaleriiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kassa': {
+      id: '/kassa'
+      path: '/kassa'
+      fullPath: '/kassa'
+      preLoaderRoute: typeof KassaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/minu-tellimused': {
+      id: '/minu-tellimused'
+      path: '/minu-tellimused'
+      fullPath: '/minu-tellimused'
+      preLoaderRoute: typeof MinuTellimusedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ostukorv': {
+      id: '/ostukorv'
+      path: '/ostukorv'
+      fullPath: '/ostukorv'
+      preLoaderRoute: typeof OstukorvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privaatsus': {
+      id: '/privaatsus'
+      path: '/privaatsus'
+      fullPath: '/privaatsus'
+      preLoaderRoute: typeof PrivaatsusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tingimused': {
+      id: '/tingimused'
+      path: '/tingimused'
+      fullPath: '/tingimused'
+      preLoaderRoute: typeof TingimusedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tooted': {
+      id: '/tooted'
+      path: '/tooted'
+      fullPath: '/tooted'
+      preLoaderRoute: typeof TootedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tellimus/$id': {
+      id: '/tellimus/$id'
+      path: '/tellimus/$id'
+      fullPath: '/tellimus/$id'
+      preLoaderRoute: typeof TellimusIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/toode/$id': {
+      id: '/toode/$id'
+      path: '/toode/$id'
+      fullPath: '/toode/$id'
+      preLoaderRoute: typeof ToodeIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  AuthRoute: AuthRoute,
+  GaleriiRoute: GaleriiRoute,
+  KassaRoute: KassaRoute,
+  KontaktRoute: KontaktRoute,
+  MinuTellimusedRoute: MinuTellimusedRoute,
+  OstukorvRoute: OstukorvRoute,
+  PrivaatsusRoute: PrivaatsusRoute,
+  TingimusedRoute: TingimusedRoute,
+  TootedRoute: TootedRoute,
+  TellimusIdRoute: TellimusIdRoute,
+  ToodeIdRoute: ToodeIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+# AGENTS
+- Shop data is read in the browser with RLS; orders are created only through the place_order database function so prices come from the database.
+- Media lives in the private "media" bucket (public buckets blocked); show images with MediaImg (signed URLs), store paths not URLs.
+- First signed-up user becomes admin via auth trigger; roles in user_roles.
