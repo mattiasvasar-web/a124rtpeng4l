@@ -33,12 +33,14 @@ function Admin() {
       <Tabs defaultValue="orders" className="mt-6">
         <TabsList className="flex-wrap">
           <TabsTrigger value="orders">Tellimused</TabsTrigger>
+          <TabsTrigger value="custom">Eritellimused</TabsTrigger>
           <TabsTrigger value="products">Tooted</TabsTrigger>
           <TabsTrigger value="gallery">Galerii</TabsTrigger>
           <TabsTrigger value="pages">Lehed</TabsTrigger>
           <TabsTrigger value="account">Konto</TabsTrigger>
         </TabsList>
         <TabsContent value="orders"><Orders /></TabsContent>
+        <TabsContent value="custom"><CustomOrders /></TabsContent>
         <TabsContent value="products"><Products /></TabsContent>
         <TabsContent value="gallery"><Gallery /></TabsContent>
         <TabsContent value="pages"><Pages /></TabsContent>
@@ -99,6 +101,65 @@ function Orders() {
           {open && <><Invoice o={open} /><Link to="/tellimus/$id" params={{ id: open.id }} className="text-sm text-primary">Ava eraldi lehel ja laadi PDF →</Link></>}
         </DialogContent>
       </Dialog>
+    </div>
+  );
+}
+
+type CustomOrderRow = {
+  id: string; customer_name: string; email: string; phone: string; description: string; budget: string;
+  status: string; admin_note: string; created_at: string;
+};
+const CUSTOM_STATUSES = ["Uus", "Pakkumine tehtud", "Töös", "Valmis", "Tühistatud"];
+
+function CustomOrders() {
+  const qc = useQueryClient();
+  const q = useQuery({
+    queryKey: ["admin-custom-orders"],
+    queryFn: async () => ((await supabase.from("custom_orders").select("*").order("created_at", { ascending: false })).data ?? []) as CustomOrderRow[],
+  });
+  async function update(id: string, patch: Partial<CustomOrderRow>) {
+    const { error } = await supabase.from("custom_orders").update(patch).eq("id", id);
+    if (error) { toast.error(error.message); return; }
+    qc.invalidateQueries({ queryKey: ["admin-custom-orders"] });
+  }
+  async function del(id: string) {
+    if (!confirm("Kustuta eritellimus?")) return;
+    await supabase.from("custom_orders").delete().eq("id", id);
+    qc.invalidateQueries({ queryKey: ["admin-custom-orders"] });
+  }
+  const rows = q.data ?? [];
+  return (
+    <div className="mt-4 space-y-4">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Stat label="Eritellimusi kokku" value={String(rows.length)} />
+        <Stat label="Uusi päringuid" value={String(rows.filter((r) => r.status === "Uus").length)} />
+      </div>
+      {rows.map((r) => (
+        <div key={r.id} className="space-y-3 rounded-2xl border bg-card p-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <p className="font-semibold">{r.customer_name} <span className="text-sm font-normal text-muted-foreground">{r.email}{r.phone && ` · ${r.phone}`}</span></p>
+              <p className="text-xs text-muted-foreground">{new Date(r.created_at).toLocaleDateString("et-EE")}{r.budget && ` · Eelarve: ${r.budget}`}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <Select value={r.status} onValueChange={(v) => update(r.id, { status: v })}>
+                <SelectTrigger className="h-8 w-40"><SelectValue /></SelectTrigger>
+                <SelectContent>{CUSTOM_STATUSES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent>
+              </Select>
+              <Button size="sm" variant="ghost" onClick={() => del(r.id)}>Kustuta</Button>
+            </div>
+          </div>
+          <p className="whitespace-pre-wrap text-sm">{r.description}</p>
+          <Textarea
+            rows={2}
+            defaultValue={r.admin_note}
+            placeholder="Admini märkus (nt pakkumise hind, tähtaeg)…"
+            maxLength={1000}
+            onBlur={(e) => e.target.value !== r.admin_note && update(r.id, { admin_note: e.target.value })}
+          />
+        </div>
+      ))}
+      {q.isSuccess && rows.length === 0 && <p className="rounded-2xl border bg-card p-4 text-muted-foreground">Eritellimusi pole veel.</p>}
     </div>
   );
 }

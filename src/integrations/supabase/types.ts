@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      custom_orders: {
+        Row: {
+          admin_note: string
+          budget: string
+          created_at: string
+          customer_name: string
+          description: string
+          email: string
+          id: string
+          phone: string
+          status: string
+          user_id: string | null
+        }
+        Insert: {
+          admin_note?: string
+          budget?: string
+          created_at?: string
+          customer_name: string
+          description: string
+          email: string
+          id?: string
+          phone?: string
+          status?: string
+          user_id?: string | null
+        }
+        Update: {
+          admin_note?: string
+          budget?: string
+          created_at?: string
+          customer_name?: string
+          description?: string
+          email?: string
+          id?: string
+          phone?: string
+          status?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       gallery_images: {
         Row: {
           caption: string

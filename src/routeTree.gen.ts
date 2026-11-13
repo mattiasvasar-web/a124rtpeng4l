@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as EritellimusRouteImport } from './routes/eritellimus'
 import { Route as GaleriiRouteImport } from './routes/galerii'
 import { Route as KassaRouteImport } from './routes/kassa'
 import { Route as KontaktRouteImport } from './routes/kontakt'
@@ -36,6 +37,11 @@ const AdminRoute = AdminRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EritellimusRoute = EritellimusRouteImport.update({
+  id: '/eritellimus',
+  path: '/eritellimus',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GaleriiRoute = GaleriiRouteImport.update({
@@ -93,6 +99,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/eritellimus': typeof EritellimusRoute
   '/galerii': typeof GaleriiRoute
   '/kassa': typeof KassaRoute
   '/kontakt': typeof KontaktRoute
@@ -108,6 +115,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/eritellimus': typeof EritellimusRoute
   '/galerii': typeof GaleriiRoute
   '/kassa': typeof KassaRoute
   '/kontakt': typeof KontaktRoute
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/eritellimus': typeof EritellimusRoute
   '/galerii': typeof GaleriiRoute
   '/kassa': typeof KassaRoute
   '/kontakt': typeof KontaktRoute
@@ -141,6 +150,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
+    | '/eritellimus'
     | '/galerii'
     | '/kassa'
     | '/kontakt'
@@ -156,6 +166,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
+    | '/eritellimus'
     | '/galerii'
     | '/kassa'
     | '/kontakt'
@@ -171,6 +182,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
+    | '/eritellimus'
     | '/galerii'
     | '/kassa'
     | '/kontakt'
@@ -187,6 +199,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
+  EritellimusRoute: typeof EritellimusRoute
   GaleriiRoute: typeof GaleriiRoute
   KassaRoute: typeof KassaRoute
   KontaktRoute: typeof KontaktRoute
@@ -220,6 +233,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/eritellimus': {
+      id: '/eritellimus'
+      path: '/eritellimus'
+      fullPath: '/eritellimus'
+      preLoaderRoute: typeof EritellimusRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/galerii': {
@@ -299,6 +319,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
+  EritellimusRoute: EritellimusRoute,
   GaleriiRoute: GaleriiRoute,
   KassaRoute: KassaRoute,
   KontaktRoute: KontaktRoute,
